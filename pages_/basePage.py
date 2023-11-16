@@ -1,12 +1,16 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+<<<<<<< HEAD
 from selenium.common.exceptions import StaleElementReferenceException, TimeoutException, NoSuchElementException
+=======
+>>>>>>> 31075c5ab09785575637e004ab9d66bc749ac07c
 
 
 class BasePage:
     def __init__(self, driver):
         self.driver = driver
 
+<<<<<<< HEAD
     def wait_for_element_to_be_present(self, locator, timeout=10):
         try:
             element_present = WebDriverWait(self.driver, timeout).until(
@@ -36,3 +40,10 @@ class BasePage:
             WebDriverWait(self.driver, 10).until(EC.staleness_of(element))
         except StaleElementReferenceException:
             pass
+=======
+    def wait_for_element(self, locator, timeout=10):
+        return WebDriverWait(self.driver, timeout).until(EC.presence_of_element_located(locator))
+
+    def click_to_cart_button(self):
+        pass
+>>>>>>> 31075c5ab09785575637e004ab9d66bc749ac07c
