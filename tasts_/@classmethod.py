@@ -1,6 +1,8 @@
 import unittest
-import time
+
 from selenium import webdriver
+
+from pages_.loginPage import LoginPage
 
 
 class AmazonLoginTest(unittest.TestCase):
@@ -16,13 +18,8 @@ class AmazonLoginTest(unittest.TestCase):
         cls.login_page = webdriver
 
     def test_login(self):
-        self.login_page.validate_continue_button_text()
-        self.login_page.fill_username("sona.ghukasyan@gmail.com")
-        self.login_page.validate_continue_button_text()
-        self.login_page.click_continue_button()
-        self.login_page.fill_password("hasiko07")
-        self.login_page.click_signin()
-        time.sleep(5)
+        login_page = LoginPage(self.driver)
+        login_page.login("sona.ghukasyan@gmail.com", "hasiko07")
 
     @classmethod
     def tearDownClass(cls):

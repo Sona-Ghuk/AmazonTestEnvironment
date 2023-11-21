@@ -1,4 +1,5 @@
 import unittest
+
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.events import EventFiringWebDriver
 from common_.utilities_.customListener import CustomListener
@@ -6,6 +7,8 @@ from selenium import webdriver
 from selenium.webdriver import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
+
+from pages_.loginPage import LoginPage
 
 custom_listener = CustomListener()
 driver = webdriver.Chrome()
@@ -23,13 +26,8 @@ class LogInPage(unittest.TestCase):
             "%2Fauth%2F2.0%2Fidentifier_select&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0")
 
     def test_login(self):
-        email_field = self.driver.find_element(By.ID, "ap_email")
-        email_field.send_keys("sona.ghukasyan@gmail.com")
-        self.driver.find_element(By.ID, "continue").click()
-
-        password_field = self.driver.find_element(By.ID, "ap_password")
-        password_field.send_keys("hasiko07")
-        self.driver.find_element(By.ID, "signInSubmit").click()
+        login_page = LoginPage(self.driver)
+        login_page.login("sona.ghukasyan@gmail.com", "hasiko07")
 
     def search_product(self):
         search_bar = self.driver.find_element(By.ID, "twotabsearchtextbox")
@@ -37,14 +35,14 @@ class LogInPage(unittest.TestCase):
         search_bar.send_keys(Keys.RETURN)
 
     def test_price_filter(self):
-        WebDriverWait(self.driver, 2).until(EC.presence_of_element_located((By.ID, "s-result-info")))
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "s-result-info")))
         price_filter = self.driver.find_element(By.ID, "low-price")
         price_filter.send_keys("50")
         price_filter = self.driver.find_element(By.ID, "high-price")
         price_filter.send_keys("100")
         self.driver.find_element(By.ID, "a-auto-id-1-announce").click()
 
-        WebDriverWait(self.driver, 2).until(EC.presence_of_element_located((By.ID, "s-results-list-atf")))
+        WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.ID, "s-results-list-atf")))
 
     def test_select_product(self):
         results = self.driver.find_elements(By.CSS_SELECTOR, "product_title")
