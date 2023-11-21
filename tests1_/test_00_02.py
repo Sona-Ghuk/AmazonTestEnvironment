@@ -1,7 +1,7 @@
 import time
 from selenium import webdriver
 from pages_.basePage import BasePage
-from pages_.cartPage import CartPage
+from pages_.cartPage import cartPage
 from pages_.loginPage import LoginPage
 from pages_.navigationBar import NavigationBar
 
@@ -28,7 +28,7 @@ loginPage.click_signin()
 navigationBar = NavigationBar(driver)
 navigationBar.click_cart_button()
 
-cartPage = CartPage(driver)
+cartPage = cartPage(driver)
 cartPage.view_cart()
 cartPage.view_cart()
 
